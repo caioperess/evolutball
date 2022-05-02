@@ -14,7 +14,7 @@ export default function CustomButton({
 }: CustomButtonProps) {
   return (
     <Button type={type} {...rest}>
-      <ButtonText>{text}</ButtonText>
+      <ButtonText type={type}>{text}</ButtonText>
     </Button>
   );
 }

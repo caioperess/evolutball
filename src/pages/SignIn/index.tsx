@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View } from "react-native";
 import AuthHeader from "../../components/AuthHeader";
@@ -8,7 +9,8 @@ import KeyboardAvoidingContainer from "../../components/KeyboardAvoidContainer";
 import SafeAreaContainer from "../../components/SafeAreaContainer";
 import { Container, Title } from "./styles";
 
-export default function SignUpPage() {
+export default function SignInPage() {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
@@ -19,7 +21,7 @@ export default function SignUpPage() {
           <BackButton />
           <View style={{ width: "100%" }}>
             <AuthHeader />
-            <Title>Informe o email e a senha para criar uma conta</Title>
+            <Title>Informe o email e a senha para entrar</Title>
           </View>
 
           <View style={{ width: "100%", flex: 1 }}>
@@ -38,8 +40,9 @@ export default function SignUpPage() {
           </View>
           <CustomButton
             type="white"
-            text="Cadastrar"
+            text="Entrar"
             style={{ marginBottom: 20 }}
+            onPress={() => navigation.navigate("ConfirmNamePage")}
           />
         </Container>
       </KeyboardAvoidingContainer>

@@ -8,7 +8,7 @@ import KeyboardAvoidingContainer from "../../components/KeyboardAvoidContainer";
 import SafeAreaContainer from "../../components/SafeAreaContainer";
 import { Container, Title } from "./styles";
 
-export default function ConfirmNamePage() {
+export default function ConfirmTeamPage() {
   const navigation = useNavigation();
   const [nome, setNome] = useState("");
 
@@ -18,11 +18,11 @@ export default function ConfirmNamePage() {
         <BackButton />
         <Container>
           <Title>{!!nome ? "😄" : "😀"}</Title>
-          <Title>Como podemos chamar você?</Title>
+          <Title>Qual o seu Time de Coração?</Title>
 
           <View style={{ width: "100%", marginTop: 30 }}>
             <Input
-              placeholder="Digite o nome"
+              placeholder="Digite seu time de coração"
               value={nome}
               onChangeText={(value) => setNome(value)}
               isFilled={!!nome}
@@ -32,7 +32,7 @@ export default function ConfirmNamePage() {
               type="white"
               text="Confirmar"
               style={{ marginTop: 15 }}
-              onPress={() => navigation.navigate("ConfirmTeamPage")}
+              onPress={() => navigation.navigate('ReadyPage')}
             />
           </View>
         </Container>

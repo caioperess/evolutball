@@ -23,11 +23,13 @@ export const Button = styled(RectButton)<ButtonProps>`
   height: 56px;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
-export const ButtonText = styled.Text`
+export const ButtonText = styled.Text<ButtonProps>`
   font-family: ${(props) => props.theme.FONTS.md};
-  font-size: 15px;
+  font-size: 16px;
   text-align: center;
-  color: #fff;
+  color: ${(props) =>
+    props.type === "white" ? props.theme.COLORS.primary_700 : "#fff"};
 `;
