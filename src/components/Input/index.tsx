@@ -35,7 +35,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
         padding: 10,
         textAlign: "center",
         color: "#fff",
-        marginBottom: 15,
+        marginBottom: 20,
       }}
       onFocus={handleInputFocus}
       onBlur={handleInputBlur}

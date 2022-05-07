@@ -25,6 +25,7 @@ export default function SelectLoginPage() {
             type="light"
             text="Entrar com uma Operadora"
             style={{ marginBottom: 10 }}
+            onPress={() => navigation.navigate("SignInOperadoraPage")}
           />
           <CustomButton
             type="dark"

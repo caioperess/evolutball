@@ -11,7 +11,6 @@ export const Title = styled.Text`
   font-family: ${(props) => props.theme.FONTS.sm};
   color: #fff;
   font-size: 17px;
-  padding: 0 10px;
   line-height: 25px;
   margin-top: 20px;
   text-align: center;

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
-import { View } from "react-native";
+import React, { useCallback, useState } from "react";
+import { Alert, View } from "react-native";
 import BackButton from "../../components/BackButton";
 import CustomButton from "../../components/Button";
 import Input from "../../components/Input";
@@ -11,6 +11,14 @@ import { Container, Title } from "./styles";
 export default function ConfirmNamePage() {
   const navigation = useNavigation();
   const [nome, setNome] = useState("");
+
+  const handleSubmit = useCallback(async () => {
+    if (nome === "") {
+      Alert.alert("Erro", "Por favor preencha todos os campos informados!");
+    } else {
+      navigation.navigate("ConfirmTeamPage", { nome });
+    }
+  }, [nome]);
 
   return (
     <SafeAreaContainer>
@@ -24,15 +32,15 @@ export default function ConfirmNamePage() {
             <Input
               placeholder="Digite o nome"
               value={nome}
+              autoCapitalize="words"
               onChangeText={(value) => setNome(value)}
               isFilled={!!nome}
             />
-
             <CustomButton
               type="white"
               text="Confirmar"
               style={{ marginTop: 15 }}
-              onPress={() => navigation.navigate("ConfirmTeamPage")}
+              onPress={handleSubmit}
             />
           </View>
         </Container>

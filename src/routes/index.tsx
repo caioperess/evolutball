@@ -9,7 +9,7 @@ export default function Routes() {
 
   return (
     <NavigationContainer>
-      {user.email ? <AppTabRoutes /> : <AuthStackRoutes />}
+      {user.nome ? <AppTabRoutes /> : <AuthStackRoutes />}
     </NavigationContainer>
   );
 }

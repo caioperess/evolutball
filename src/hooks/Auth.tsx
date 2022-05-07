@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 
 interface SignInCredentials {
+  nome: string;
   email: string;
   password: string;
 }
 
 interface userData {
+  nome: string;
   email: string;
   password: string;
 }
@@ -21,8 +23,8 @@ const AuthContext = React.createContext<AuthContextData>({} as AuthContextData);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<userData>({} as userData);
 
-  async function SignIn({ email, password }: SignInCredentials): Promise<void> {
-    setUser({ email, password });
+  async function SignIn({ email, password, nome }: SignInCredentials): Promise<void> {
+    setUser({ email, password, nome });
   }
 
   async function SignOut(): Promise<void> {

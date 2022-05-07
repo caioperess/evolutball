@@ -10,18 +10,21 @@ import SafeAreaContainer from "../../components/SafeAreaContainer";
 import { useAuth } from "../../hooks/Auth";
 import { Container, Title } from "./styles";
 
-export default function SignUpPage() {
-  const navigation = useNavigation();
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+export default function SignInOperadoraPage() {
+  const { SignIn } = useAuth();
+  const [cpf, setCpf] = useState("");
 
   const handleSubmit = useCallback(async () => {
-    if (email === "" || senha === "") {
+    if (cpf === "") {
       Alert.alert("Erro", "Por favor preencha todos os campos informados!");
     } else {
-      navigation.navigate("ConfirmNamePage");
+      await SignIn({
+        email: "teste@teste.com",
+        password: "123456",
+        nome: "Junior",
+      });
     }
-  }, [email, senha]);
+  }, [cpf]);
 
   return (
     <SafeAreaContainer>
@@ -30,29 +33,21 @@ export default function SignUpPage() {
           <BackButton />
           <View style={{ width: "100%" }}>
             <AuthHeader />
-            <Title>Informe seu email e senha para criar uma conta</Title>
+            <Title>Informe o CPF cadastrado na sua operadora para entrar</Title>
           </View>
 
           <View style={{ width: "100%", flex: 1 }}>
             <Input
-              placeholder="Digite o email"
-              value={email}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              onChangeText={(value) => setEmail(value)}
-              isFilled={!!email}
+              placeholder="Digite o cpf"
+              value={cpf}
+              keyboardType="numeric"
+              onChangeText={(value) => setCpf(value)}
+              isFilled={!!cpf}
             />
-            <Input
-              placeholder="Digite a senha"
-              value={senha}
-              autoCapitalize="none"
-              secureTextEntry
-              onChangeText={(value) => setSenha(value)}
-              isFilled={!!senha}
-            />
+
             <CustomButton
               type="white"
-              text="Cadastrar"
+              text="Entrar"
               style={{ marginBottom: 20 }}
               onPress={handleSubmit}
             />
