@@ -14,6 +14,8 @@ import {
 } from "./styles";
 import theme from "../../theme";
 
+import {} from '../../service/fakeApi';
+
 export default function HomePage() {
   return (
     <SafeAreaContainer>

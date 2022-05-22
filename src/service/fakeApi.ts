@@ -35,6 +35,63 @@ import Real from './assets/Times/Real.png';
 import City from './assets/Times/City.png';
 import Liverpool from './assets/Times/Liverpool.png';
 import Villarreal from './assets/Times/VillaReal.png';
+import Vivo from './assets/Operadores/vivo.png';
+import Claro from './assets/Operadores/claro.png';
+import Net from './assets/Operadores/net.png';
+
+export const login = [ 
+  {
+    "contas": [
+      {
+        "nome": "Yago",
+        "email": "yago@evolutball.com",
+        "senha": "yago@evolutball",
+        "time": "São Paulo",
+        "tipo-conta": "pessoal"
+      },
+      {
+        "nome": "Caio",
+        "email": "caio@evolutball.com",
+        "senha": "caio@evolutball",
+        "time": "São Paulo",
+        "tipo-conta": "pessoal"
+      },
+      {
+        "nome": "Renan",
+        "email": "renan@evolutball.com",
+        "senha": "renan@evolutball",
+        "time": "São Paulo",
+        "tipo-conta": "pessoal"
+      },
+      {
+        "nome": "Antonio",
+        "email": "antonio@evolutball.com",
+        "senha": "antonio@evolutball",
+        "time": "Corinthians",
+        "tipo-conta": "Claro"
+      },
+    ],
+  }
+]
+
+export const TipoDeConta = [
+  {
+    "operadores": [
+      {
+        "nome": "Claro",
+        "logo": Claro,
+      },
+      {
+        "nome": "Vivo",
+        "logo": Vivo,
+      },
+      {
+        "nome": "Net",
+        "logo": Net,
+      },
+    ],
+  }
+]
 
 export const campeonatos = [ 
   {
