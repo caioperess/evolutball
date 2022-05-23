@@ -13,7 +13,11 @@ export default function AuthHeader() {
         alignItems: "center",
       }}
     >
-      <Image source={logo} style={{width: '100%', height: '100%'}} resizeMode="cover"/>
+      <Image
+        source={logo}
+        style={{ width: "100%", height: "100%" }}
+        resizeMode="cover"
+      />
     </View>
   );
 }

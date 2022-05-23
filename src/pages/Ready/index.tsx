@@ -12,8 +12,8 @@ export default function ReadyPage() {
   const handleSubmit = useCallback(async () => {
     if (route.params) {
       SignIn({
-        email: "teste@teste.com",
-        password: "123456",
+        email: "renan@evolutball.com",
+        password: "renan@evolutball",
         nome: route.params.nome,
       });
     }

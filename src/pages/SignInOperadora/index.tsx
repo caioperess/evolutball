@@ -19,9 +19,9 @@ export default function SignInOperadoraPage() {
       Alert.alert("Erro", "Por favor preencha todos os campos informados!");
     } else {
       await SignIn({
-        email: "teste@teste.com",
-        password: "123456",
-        nome: "Junior",
+        email: "antonio@evolutball.com",
+        password: "antonio@evolutball",
+        nome: "Antonio",
       });
     }
   }, [cpf]);

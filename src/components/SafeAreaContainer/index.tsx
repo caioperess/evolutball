@@ -11,7 +11,11 @@ export default function SafeAreaContainer({
 }: SafeAreaContainerProps) {
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: theme.COLORS.primary_700, paddingHorizontal: 20 }}
+      style={{
+        flex: 1,
+        backgroundColor: theme.COLORS.primary_700,
+        paddingHorizontal: 20,
+      }}
     >
       {children}
     </SafeAreaView>

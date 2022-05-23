@@ -9,7 +9,7 @@ import theme from "../../theme";
 import { useNavigation } from "@react-navigation/native";
 
 export default function IntroductionPage() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <SafeAreaContainer>
@@ -29,7 +29,7 @@ export default function IntroductionPage() {
           coração
         </SubTitle>
 
-        <NextButton onPress={() => navigation.navigate('SelectLogin')}>
+        <NextButton onPress={() => navigation.navigate("SelectLogin")}>
           <Feather
             name="chevron-right"
             size={25}

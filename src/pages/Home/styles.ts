@@ -32,7 +32,7 @@ export const HeaderSubTitle = styled.Text`
 export const HeaderButton = styled(RectButton)`
   width: 56px;
   height: 56px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.COLORS.white};
   justify-content: center;
   align-items: center;
   border-radius: 10px;
@@ -46,7 +46,7 @@ export const ContentContainer = styled.View`
 `;
 
 export const ContentTitle = styled.Text`
-  color: #fff;
+  color: ${(props) => props.theme.COLORS.white};
   font-size: 17px;
   font-family: ${(props) => props.theme.FONTS.sm};
   text-align: left;
@@ -56,9 +56,30 @@ export const ContentTitle = styled.Text`
 export const OptionCard = styled(RectButton)`
   width: 76px;
   height: 40px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.COLORS.white};
   border-radius: 12px;
   justify-content: center;
   align-items: center;
   margin-left: 4px;
+`;
+
+export const LeagueCard = styled(RectButton)`
+  width: 160px;
+  height: 200px;
+  background-color: ${(props) => props.theme.COLORS.white};
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 5px;
+
+  padding: 10px;
+`;
+
+export const LeagueCardText = styled.Text`
+  color: ${(props) => props.theme.COLORS.text_light};
+  font-size: 14px;
+  font-family: ${(props) => props.theme.FONTS.md};
+  text-align: center;
+
+  margin-top: 10px;
 `;

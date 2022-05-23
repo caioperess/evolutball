@@ -1,5 +1,5 @@
-import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import React, { useState } from "react";
+import { FlatList, ScrollView, Text, View, Image } from "react-native";
 import SafeAreaContainer from "../../components/SafeAreaContainer";
 import { FontAwesome5 } from "@expo/vector-icons";
 import {
@@ -10,13 +10,25 @@ import {
   HeaderButton,
   HeaderSubTitle,
   HeaderTitle,
+  LeagueCard,
+  LeagueCardText,
   OptionCard,
 } from "./styles";
 import theme from "../../theme";
 
-import {} from '../../service/fakeApi';
+import { campeonatos } from "../../service/fakeApi";
+import { useAuth } from "../../hooks/Auth";
+import introductionImg from "../../assets/man.png";
+
+interface ChampionshipTypes {
+  nome: string;
+  logo: string;
+}
 
 export default function HomePage() {
+  const { user, SignOut } = useAuth();
+  const [championship, setChampionship] = useState<ChampionshipTypes[]>([]);
+
   return (
     <SafeAreaContainer>
       <Container>
@@ -25,9 +37,9 @@ export default function HomePage() {
             style={{ alignItems: "flex-start", justifyContent: "flex-start" }}
           >
             <HeaderTitle>Olá,</HeaderTitle>
-            <HeaderSubTitle>Caio</HeaderSubTitle>
+            <HeaderSubTitle>{user.nome}</HeaderSubTitle>
           </View>
-          <HeaderButton>
+          <HeaderButton onPress={() => SignOut()}>
             <FontAwesome5
               name="power-off"
               size={20}
@@ -52,34 +64,52 @@ export default function HomePage() {
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={{ marginTop: 24 }}
             >
-              <OptionCard>
-                <Text>Volei</Text>
-              </OptionCard>
-              <OptionCard>
-                <Text>Volei</Text>
-              </OptionCard>
-              <OptionCard>
-                <Text>Volei</Text>
-              </OptionCard>
-              <OptionCard>
-                <Text>Volei</Text>
-              </OptionCard>
-              <OptionCard>
-                <Text>Volei</Text>
-              </OptionCard>
-              <OptionCard>
-                <Text>Volei</Text>
-              </OptionCard>
-              <OptionCard>
-                <Text>Volei</Text>
-              </OptionCard>
+              {Object.entries(campeonatos).map(([key, value]) => {
+                return (
+                  <OptionCard key={key} onPress={() => setChampionship(value)}>
+                    <Text>{key}</Text>
+                  </OptionCard>
+                );
+              })}
             </ScrollView>
           </View>
-          <View style={{ flex: 1, width: "100%" }}>
+
+          {championship.length !== 0 ? (
             <View
-              style={{ backgroundColor: "#fff", height: 60, width: 60 }}
-            ></View>
-          </View>
+              style={{
+                flex: 1,
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FlatList
+                scrollEnabled={false}
+                data={championship}
+                keyExtractor={(item) => item.nome}
+                renderItem={({ item }) => (
+                  <LeagueCard>
+                    <Image
+                      source={item.logo}
+                      resizeMode="contain"
+                      style={{ width: "100%", height: "70%" }}
+                    />
+                    <LeagueCardText>{item.nome}</LeagueCardText>
+                  </LeagueCard>
+                )}
+                showsVerticalScrollIndicator={false}
+                numColumns={2}
+              />
+            </View>
+          ) : (
+            <View style={{ width: "100%", height: "100%" }}>
+              <Image
+                source={introductionImg}
+                resizeMode="contain"
+                style={{ width: "100%", height: "100%" }}
+              />
+            </View>
+          )}
         </ContentContainer>
       </Container>
     </SafeAreaContainer>
