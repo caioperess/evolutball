@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, ScrollView, Text, View, Image } from "react-native";
 import SafeAreaContainer from "../../components/SafeAreaContainer";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -19,6 +19,9 @@ import theme from "../../theme";
 import { campeonatos } from "../../service/fakeApi";
 import { useAuth } from "../../hooks/Auth";
 import introductionImg from "../../assets/man.png";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 
 interface ChampionshipTypes {
   nome: string;
@@ -28,6 +31,27 @@ interface ChampionshipTypes {
 export default function HomePage() {
   const { user, SignOut } = useAuth();
   const [championship, setChampionship] = useState<ChampionshipTypes[]>([]);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    async function LoadData() {
+      Toast.show({
+        position: "top",
+        type: "success",
+        text1: "Seu time do coração está jogando agora!! 💜",
+        text2: "Não perca a oportunidade de assisti-lo!! 👋",
+        visibilityTime: 3000,
+        autoHide: true,
+      });
+    }
+
+    LoadData();
+  }, []);
+
+  async function handleNavigate(league: string) {
+    await AsyncStorage.setItem("@evolutball:league", league);
+    navigation.navigate("ListGames");
+  }
 
   return (
     <SafeAreaContainer>
@@ -62,11 +86,19 @@ export default function HomePage() {
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ marginTop: 24 }}
+              contentContainerStyle={{ marginTop: 20 }}
             >
               {Object.entries(campeonatos).map(([key, value]) => {
                 return (
-                  <OptionCard key={key} onPress={() => setChampionship(value)}>
+                  <OptionCard
+                    key={key}
+                    onPress={() => setChampionship(value.tipos)}
+                  >
+                    <Image
+                      source={value.image}
+                      resizeMode="contain"
+                      style={{ width: 20, height: 20, marginRight: 10 }}
+                    />
                     <Text>{key}</Text>
                   </OptionCard>
                 );
@@ -84,11 +116,11 @@ export default function HomePage() {
               }}
             >
               <FlatList
-                scrollEnabled={false}
+                scrollEnabled
                 data={championship}
                 keyExtractor={(item) => item.nome}
                 renderItem={({ item }) => (
-                  <LeagueCard>
+                  <LeagueCard onPress={() => handleNavigate(item.nome)}>
                     <Image
                       source={item.logo}
                       resizeMode="contain"

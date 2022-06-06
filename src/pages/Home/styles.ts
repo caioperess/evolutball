@@ -54,13 +54,16 @@ export const ContentTitle = styled.Text`
 `;
 
 export const OptionCard = styled(RectButton)`
-  width: 76px;
-  height: 40px;
+  width: 110px;
+  height: 60px;
   background-color: ${(props) => props.theme.COLORS.white};
   border-radius: 12px;
   justify-content: center;
   align-items: center;
-  margin-left: 4px;
+  margin-left: 5px;
+  flex-direction: row;
+
+  padding: 10px;
 `;
 
 export const LeagueCard = styled(RectButton)`
@@ -70,8 +73,7 @@ export const LeagueCard = styled(RectButton)`
   border-radius: 12px;
   justify-content: center;
   align-items: center;
-  margin: 10px 5px;
-
+  margin: 10px 6px;
   padding: 10px;
 `;
 

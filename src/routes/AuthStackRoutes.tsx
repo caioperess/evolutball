@@ -22,7 +22,10 @@ export default function AuthStackRoutes() {
       <Stack.Screen name="Introduction" component={IntroductionPage} />
       <Stack.Screen name="SelectLogin" component={SelectLoginPage} />
       <Stack.Screen name="SignInPage" component={SignInPage} />
-      <Stack.Screen name="SignInOperadoraPage" component={SignInOperadoraPage} />
+      <Stack.Screen
+        name="SignInOperadoraPage"
+        component={SignInOperadoraPage}
+      />
       <Stack.Screen name="SignUpPage" component={SignUpPage} />
       <Stack.Screen name="ConfirmNamePage" component={ConfirmNamePage} />
       <Stack.Screen name="ConfirmTeamPage" component={ConfirmTeamPage} />

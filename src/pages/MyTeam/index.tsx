@@ -8,12 +8,11 @@ import {
   ActivityIndicator,
 } from "react-native";
 import SafeAreaContainer from "../../components/SafeAreaContainer";
-import { Feather } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import theme from "../../theme";
 
-import { jogos } from "../../service/fakeApi";
+import { jogos, timeDoCoracao } from "../../service/fakeApi";
 import { useAuth } from "../../hooks/Auth";
 import {
   Container,
@@ -22,18 +21,13 @@ import {
   HeaderButton,
 } from "../Home/styles";
 import { HeaderTitle, LeagueCard, LeagueCardText, TextLeague } from "./styles";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import BackButton from "../../components/BackButton";
+import { useNavigation } from "@react-navigation/native";
 import { JogosTypes } from "../Transmission";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BorderlessButton } from "react-native-gesture-handler";
 
-export default function ListGames() {
-  const { SignOut } = useAuth();
+export default function MyTeam() {
+  const { SignOut, user } = useAuth();
   const [games, setGames] = useState<JogosTypes[]>([]);
   const [gamesLive, setGamesLive] = useState<JogosTypes[]>([]);
-  const [league, setLeague] = useState<string | null>("");
-  const [rodada, setRodada] = useState<string | null>("");
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
@@ -44,35 +38,18 @@ export default function ListGames() {
       setGamesLive([]);
 
       try {
-        const leagueName = await AsyncStorage.getItem("@evolutball:league");
-
-        setLeague(leagueName);
         const jogosLive: JogosTypes[] = [];
         const items: JogosTypes[] = [];
 
-        if (leagueName === "Campeonato Brasileiro") {
-          setRodada(jogos.rodada[0]);
-          jogos.CampeonatoBrasileiro.forEach((item) => {
-            if (item.aoVivo) {
-              jogosLive.push(item);
-            } else {
-              items.push(item);
-            }
-            setGamesLive(jogosLive);
-            setGames(items);
-          });
-        } else if (leagueName === "Champions League") {
-          setRodada(jogos.rodadaChampions[0]);
-          jogos.Champions.forEach((item) => {
-            if (item.aoVivo) {
-              jogosLive.push(item);
-            } else {
-              items.push(item);
-            }
-            setGamesLive(jogosLive);
-            setGames(items);
-          });
-        }
+        timeDoCoracao.SaoPaulo.forEach((item) => {
+          if (item.aoVivo) {
+            jogosLive.push(item);
+          } else {
+            items.push(item);
+          }
+          setGamesLive(jogosLive);
+          setGames(items);
+        });
       } catch (err) {
         setLoading(false);
       } finally {
@@ -97,17 +74,12 @@ export default function ListGames() {
 
   return (
     <SafeAreaContainer>
-      <View style={{ width: "100%", marginVertical: 10 }}>
-        <BorderlessButton onPress={() => navigation.navigate("HomePage")}>
-          <Feather name="chevron-left" size={24} color="#fff" />
-        </BorderlessButton>
-      </View>
       <Container>
         <Header>
           <View
             style={{ alignItems: "flex-start", justifyContent: "flex-start" }}
           >
-            <HeaderTitle>{league}</HeaderTitle>
+            <HeaderTitle>{user.time}</HeaderTitle>
           </View>
           <HeaderButton onPress={() => SignOut()}>
             <FontAwesome5
@@ -162,9 +134,7 @@ export default function ListGames() {
                       {item.aoVivo ? (
                         <LeagueCardText>🔴 Ao vivo</LeagueCardText>
                       ) : (
-                        <LeagueCardText>
-                          {item.data} - {item.horario}
-                        </LeagueCardText>
+                        <LeagueCardText>{item.horario}</LeagueCardText>
                       )}
                     </View>
                     <View
@@ -188,7 +158,7 @@ export default function ListGames() {
                 showsVerticalScrollIndicator={false}
               />
             </View>
-            <TextLeague>{rodada}</TextLeague>
+            <TextLeague>Jogos do {user.time}</TextLeague>
             <View
               style={{
                 flex: 1,
