@@ -33,7 +33,7 @@ export default function HomePage() {
   const [championship, setChampionship] = useState<ChampionshipTypes[]>([]);
   const navigation = useNavigation();
 
-  useEffect(() => {
+
     async function LoadData() {
       Toast.show({
         position: "top",
@@ -45,8 +45,6 @@ export default function HomePage() {
       });
     }
 
-    LoadData();
-  }, []);
 
   async function handleNavigate(league: string) {
     await AsyncStorage.setItem("@evolutball:league", league);

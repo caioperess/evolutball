@@ -1,14 +1,12 @@
 import React from "react";
 import { View, Image } from "react-native";
 import SafeAreaContainer from "../../components/SafeAreaContainer";
-import YoutubePlayer from "react-native-youtube-iframe";
 import theme from "../../theme";
 
 import { Container, ContentContainer } from "../Home/styles";
 import { Header, HeaderTitle, LeagueCard, LeagueCardText } from "./styles";
 import { useRoute } from "@react-navigation/native";
 import BackButton from "../../components/BackButton";
-import { Video } from "expo-av";
 import WebView from "react-native-webview";
 
 export interface JogosTypes {
@@ -45,19 +43,21 @@ export default function Transmission() {
         </View>
       </Header>
       <Container>
-        <WebView
-          style={{
-            alignSelf: "center",
-            width: 400,
-            height: 350,
-            marginBottom: 20,
-            borderRadius: 12,
-          }}
-          javaScriptEnabled={true}
-          source={{
-            uri: `${item.url}`,
-          }}
-        />
+        {item.url !== "" ? (
+          <WebView
+            style={{
+              alignSelf: "center",
+              width: 400,
+              height: 350,
+              marginBottom: 20,
+              borderRadius: 12,
+            }}
+            javaScriptEnabled={true}
+            source={{
+              uri: `${item.url}`,
+            }}
+          />
+        ) : null}
         <ContentContainer>
           <LeagueCard>
             <View
