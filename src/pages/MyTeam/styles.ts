@@ -18,7 +18,7 @@ export const HeaderTitle = styled.Text`
   font-family: ${(props) => props.theme.FONTS.sm};
   color: ${(props) => props.theme.COLORS.white};
   font-weight: 100;
-  font-size: 30px;
+  font-size: 25px;
 `;
 
 export const LeagueCardText = styled.Text`

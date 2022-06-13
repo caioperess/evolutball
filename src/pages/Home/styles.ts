@@ -1,6 +1,10 @@
 import { RectButton } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 
+interface OptionCardProps {
+  active: boolean
+}
+
 export const Container = styled.View`
   flex: 1;
   align-items: center;
@@ -53,10 +57,10 @@ export const ContentTitle = styled.Text`
   width: 100%;
 `;
 
-export const OptionCard = styled(RectButton)`
+export const OptionCard = styled(RectButton)<OptionCardProps>`
   width: 110px;
   height: 60px;
-  background-color: ${(props) => props.theme.COLORS.white};
+  background-color: ${(props) => props.active ? props.theme.COLORS.primary_300 : props.theme.COLORS.white};
   border-radius: 12px;
   justify-content: center;
   align-items: center;
